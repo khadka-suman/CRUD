@@ -1,0 +1,1 @@
+﻿Server=SUMAN;Database=CRUDEX;Trusted_Connection=True;
