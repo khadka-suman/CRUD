@@ -1,10 +1,18 @@
-﻿namespace CRUD.Models
+﻿using CRUD.Data;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CRUD.Models
 {
     public class Customer
     {
 
-        public int Customer_Id { get; set; }
+
+        [Key]
+        public int  Customer_Id { get; set; }
+        [Required]
         public string? Customer_Name { get; set; }
+        [Required]
         public string? Customer_Address { get; set; }
 
     }

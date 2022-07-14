@@ -1,130 +1,56 @@
-﻿using CRUD.Data;
-using Dapper;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using System.Configuration;
-
+using CRUD.Controllers;
+using CRUD.Repository;
+using CRUD.Data;
+using CRUD.Models;
 
 namespace CRUD.Controllers
 {
-    
+    [Route("api/[controller]/[action]")]
+    [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly DefaultContext _defaultContext;
-        private readonly ILogger _logger;
-       // private readonly DbConnection _dbConnection;
-        public CustomerController(IConfiguration configuration, DefaultContext defaultContext /*DbConnection dbConnection*/, ILogger logger)
+        private readonly ICustomerRepository _customerRepository;
+        public CustomerController(ICustomerRepository customerRepository)
         {
-            _configuration = configuration;
-            _defaultContext = defaultContext;
-            _logger = logger;
-            // _dbConnection = dbConnection;
+            _customerRepository = customerRepository;
         }
 
-        [HttpGet]
-        [Route("/Customer")]
-        public object CustomerName(string Name)
-        {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new SqlConnection(Connection))
-            {
-                a = "connection sucessful";
-
-            }
-            return a;
-        }
-
-
-        [HttpPost]
-        [Route("/Customer/{Name}")]
-        public object CustomerName(string Name, string Address)
-        {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new SqlConnection(Connection))
-            {
-                a = conn.Query("select * from tblCustomer");
-
-            }
-            return a;
-        }
-
-        [HttpGet]
-        [Route("/GetCustomer/{Id}")]
-        public object GetCustomerName()
-        {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new SqlConnection(Connection))
-            {
-                a = conn.Query("Select * from tblCustomer");
-            }
-            return a;
-        }
-
-        [HttpPut]
-        [Route("/Updatecustomer/{Id}/{newName}/{newAddress}")]
-        public object UpdateCustomer(int Id, String newName, string newAddress)
-        {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using(SqlConnection conn = new SqlConnection(Connection))
-            {
-                a = conn.Query(@"update tblCustomer set CustomerName = @NewName, CustomerAddress = @NewAddress where ID = @id",
-                new { NewName = newName,NewAddress= newAddress, id = Id});
-            }
-            return a;
-        }
-
-
-        [HttpDelete]
-        [Route("/DeleteCustomer/{Id}")]
-        public object DeleteCustomer(int Id)
-        {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new SqlConnection(Connection))
-            {
-                a = conn.Query("select * from tblCustomer");
-                    }
-            return a;
-
-        }
-
-
-
-
-       /* [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<CustomerController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Customer> GetCustomerById(int id)
         {
-            return "value";
+            return await _customerRepository.GetCustomerById(id);
         }
+        [HttpGet]
+        public async Task<List<Customer>> GetCustomers()
+        {
+            return await _customerRepository.GetCustomers();
 
-        // POST api/<CustomerController>
+        }
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Customer>> AddCustomer([FromBody] Customer customer)
         {
-        }
+            if (customer == null)
+            {
+                return BadRequest("Invalid State");
 
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+            }
+            return await _customerRepository.AddCustomer(customer);
+        }
+        [HttpPut]
+        public async Task<ActionResult<Customer>> UpdateCustomer([FromBody] Customer customer)
         {
+            if (customer ==null)
+            {
+                return BadRequest("Invalid State");
+            }
+            return await _customerRepository.UpdateCustomer(customer);
         }
-
-        // DELETE api/<CustomerController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<Customer>> DeleteCustomer(int id)
         {
-        }*/
+            return await _customerRepository.DeleteCustomer(id);
+        }
     }
 }

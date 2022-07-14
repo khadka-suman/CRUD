@@ -2,29 +2,54 @@
 using System;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using CRUD.Models;
 
 namespace CRUD.Data
 {
-    public class DefaultContext
+    public class DefaultContext : DbContext
     {
+        public DefaultContext(DbContextOptions<DefaultContext> options) : base(options)
+        {
+
+        }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<OrderList> OrderLists { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+        }
+
+
+        /*    public class DefaultContext1
+        */   /* {*/
         public string DbCon()
         {
+            string joinpath = " ";
             string txtpath = @"C:\Users\97798\source\repos\CRUD\CRUD\DbConnection.txt";
             try
             {
                 if (File.Exists(txtpath))
                 {
                     using StreamReader sr = new(txtpath);
-                    txtpath = sr.ReadToEnd();
-/*                    string ss = sr.ReadToEnd();
-                    string[] txtsplit = ss.Split(';');
-                    string Server = txtsplit[0].ToString();
-                    string Database = txtsplit[1].ToString();
-                    string Trusted_Connection = txtsplit[2].ToString();*/
-
-
-                    
-                    //yaa join garnu parna
+                    {
+                        while (sr.Peek() >= 0)
+                        {
+                            //txtpath = sr.ReadToEnd();
+                            string ss = sr.ReadLine();
+                            string[] txtsplit = ss.Split(';');
+                            string DataSource = txtsplit[0].ToString();
+                            string Catalog = txtsplit[1].ToString();
+                            string IntegratedSecurity = txtsplit[2].ToString();
+                            string ConnectTimeout = txtsplit[3].ToString();
+                            string Encrypt = txtsplit[4].ToString();
+                            string TrustServerCertifucate = txtsplit[5].ToString();
+                            string ApplictaionIntent = txtsplit[6].ToString();
+                            string MultiSubnetFailover = txtsplit[7].ToString();
+                            joinpath = DataSource + ";" + Catalog + ";" + IntegratedSecurity + ";" + ConnectTimeout + ";" + ConnectTimeout + ";" + Encrypt + ";" + TrustServerCertifucate + ";" + ApplictaionIntent + ";" + MultiSubnetFailover;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -32,51 +57,14 @@ namespace CRUD.Data
                 Console.WriteLine(ex.Message);
             }
 
-            return txtpath;
-             
+            return joinpath;
+
+
         }
 
-
-        /*  static void Main(string[] args)
-          {
-              try
-              {
-                  SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-
-                  builder.DataSource = "<SUMAN>";
-                  builder.InitialCatalog = "<CRUDEX>";
-
-                  using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                  {
-
-                      connection.Open();
-
-                      String sql = "SELECT name, collation_name FROM sys.databases";
-
-                      using (SqlCommand command = new SqlCommand(sql, connection))
-                      {
-                          using (SqlDataReader reader = command.ExecuteReader())
-                          {
-                              while (reader.Read())
-                              {
-                                  Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                              }
-                          }
-                      }
-                  }
-              }
-              catch (SqlException e)
-              {
-                  Console.WriteLine(e.ToString());
-              }
-              Console.WriteLine("\nDone. Press enter.");
-              Console.ReadLine();
-          }
-
-      }*/
+    
     }
 }
-
 
 
 

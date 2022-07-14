@@ -1,8 +1,12 @@
-﻿namespace CRUD.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CRUD.Models
 {
     public class Product
     {
-        public int Order_Id { get; set; }
+        [Key]
+        public int Product_Id { get; set; }
+        [Required]
         public string? Product_Name { get; set; }
 
     }

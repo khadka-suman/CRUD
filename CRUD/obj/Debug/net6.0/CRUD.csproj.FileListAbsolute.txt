@@ -34,8 +34,6 @@ C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\CRUD.GeneratedMSBuildEdit
 C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\CRUD.AssemblyInfoInputs.cache
 C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\CRUD.AssemblyInfo.cs
 C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\CRUD.csproj.CoreCompileInputs.cache
-C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\CRUD.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\CRUD.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\97798\source\repos\CRUD\CRUD\obj\Debug\net6.0\scopedcss\bundle\CRUD.styles.css

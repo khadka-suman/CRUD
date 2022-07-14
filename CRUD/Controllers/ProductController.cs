@@ -1,7 +1,7 @@
-﻿/*using CRUD.Data;
-using Dapper;
+﻿using CRUD.Models;
+using CRUD.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
 
 namespace CRUD.Controllers
 {
@@ -9,70 +9,43 @@ namespace CRUD.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-
-        // private readonly IConfiguration _configuration;
-        private readonly DefaultContext _defaultContext;
-        private ProductController(*//*IConfiguration configuration,*//* DefaultContext defaultContext)
+         private readonly IProductRepository _productRepository;
+        public ProductController(IProductRepository productRepository)
         {
-            //  _configuration = configuration;
-            _defaultContext = defaultContext;
+            _productRepository = productRepository;
+        }
+
+
+        [HttpGet]
+        public async Task<List<Product>> GetProducts()
+        {
+            return await _productRepository.GetProducts();
+
         }
 
         [HttpPost]
-        [Route("/Product/{Name}")]
-        public object ProductName(string Name)
+        public async Task<ActionResult<Product>> AddProduct([FromBody] Product product)
         {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new(Connection))
+            if (product == null)
             {
-                a = conn.Query("select * from tblProduct");
+                return BadRequest("Invalid State");
 
             }
-            return a;
+            return await _productRepository.AddProduct(product);
         }
-
-        [HttpGet]
-        [Route("/GetProduct/{Id}")]
-        public object GetProductName()
-        {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new(Connection))
-            {
-                a = conn.Query("Select * from tblProduct");
-            }
-            return a;
-        }
-
         [HttpPut]
-        [Route("/Updatecustomer/{Id}/{newName}/{newAddress}")]
-        public object UpdateProduct(int Id, String newName, string newAddress)
+        public async Task<ActionResult<Product>> UpdateProduct([FromBody] Product product)
         {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new(Connection))
+            if (product ==null)
             {
-                a = conn.Query(@"update tblProduct set CustomerName = @NewName, CustomerAddress = @NewAddress where ID = @id",
-                new { NewName = newName, NewAddress = newAddress, id = Id });
+                return BadRequest("Invalid State");
             }
-            return a;
+            return await _productRepository.UpdateProduct(product);
         }
-
-
-        [HttpDelete]
-        [Route("/DeleteProduct/{Id}")]
-        public object DeleteProduct(int Id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
-            object a = " ";
-            string Connection = _defaultContext.DbCon();
-            using (SqlConnection conn = new(Connection))
-            {
-                a = conn.Query("select * from tblProduct");
-            }
-            return a;
-
+            return await _productRepository.DeleteProduct(id);
         }
     }
 }
-*/
