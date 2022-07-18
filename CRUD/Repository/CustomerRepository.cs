@@ -1,4 +1,4 @@
-﻿using CRUD.Data;
+﻿/*using CRUD.Data;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -27,9 +27,9 @@ namespace CRUD.Repository
         }
         public async Task<List<Customer>> GetCustomers()
         {
-           /* try
+           *//* try
             {
-            */    using (IDbConnection conn = connection)
+            *//*    using (IDbConnection conn = connection)
                 {
                     string Query = "CRUD_Customer";
                     conn.Open();
@@ -39,16 +39,16 @@ namespace CRUD.Repository
                     var result = await conn.QueryAsync<Customer>(Query, param, commandType: CommandType.StoredProcedure);
                     return result.ToList();
                 }
-           /* }
+           *//* }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }*/
+            }*//*
         }
         public async Task<Customer> AddCustomer(Customer customer)
         {
-           /* try
-            {*/
+           *//* try
+            {*//*
                 using (IDbConnection conn = connection)
                 {
                     string sQuery = "CRUD_Customer";
@@ -62,18 +62,18 @@ namespace CRUD.Repository
                     return result.FirstOrDefault();
 
                 }
-           /* }
+           *//* }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }*/
+            }*//*
 
         }
             public async Task<Customer> UpdateCustomer(Customer customer)
             {
-               /* try
+               *//* try
                 {
-                   */ using (IDbConnection conn = connection)
+                   *//* using (IDbConnection conn = connection)
                     {
                         string Query = "CRUD_Customer";
                         conn.Open();
@@ -88,16 +88,16 @@ namespace CRUD.Repository
                     }
 
 
-                /*}
+                *//*}
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                }*/
+                }*//*
             }
             public async Task<Customer> GetCustomerById(int id)
             {
-               /* try
-                {*/
+               *//* try
+                {*//*
                     using (IDbConnection conn = connection)
                     {
                         string Query = "CRUD_Customer";
@@ -108,19 +108,19 @@ namespace CRUD.Repository
                         var result = await conn.QueryAsync<Customer>(Query, param, commandType: CommandType.StoredProcedure);
                         return result.FirstOrDefault();
                     }
-               /* }
+               *//* }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                }*/
+                }*//*
             
             }
 
 
         public async Task<Customer>DeleteCustomer(int id)
         {
-           /* try
-            {*/
+           *//* try
+            {*//*
                 using (IDbConnection conn = connection)
                 {
                     string Query = "CRUD_Customer";
@@ -131,12 +131,16 @@ namespace CRUD.Repository
                     var result = await conn.QueryAsync<Customer>(Query, param, commandType: CommandType.StoredProcedure);
                     return result.FirstOrDefault();
                 }
-           /* }
+           *//* }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }*/
+            }*//*
         }
     }
 }
+
+*/
+
+
 

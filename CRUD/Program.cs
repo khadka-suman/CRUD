@@ -13,8 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<DefaultContext, DefaultContext>();
-builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
-builder.Services.AddTransient<IProductRepository, ProductRepository>();
+/*builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
+*/builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IOrderListRepository, OrderListRepository>();
 
 

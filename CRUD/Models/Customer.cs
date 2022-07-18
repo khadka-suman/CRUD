@@ -15,5 +15,12 @@ namespace CRUD.Models
         [Required]
         public string? Customer_Address { get; set; }
 
+        [ForeignKey("Order")]
+        public int Order_Id { get; set; }
+        public string? Order_Name { get; set; } 
+
+        public List<OrderList> Order_List { get; set; }
+
+
     }
 }

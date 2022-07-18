@@ -1,6 +1,7 @@
 ﻿using CRUD.Data;
 using CRUD.Models;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -33,6 +34,10 @@ namespace CRUD.Repository
                 conn.Open();
                 DynamicParameters param = new DynamicParameters();
                 param.Add("@ACTION", "A");
+                /*conn.Open();
+                 DynamicParameters param = new DynamicParameters();
+                 param.Add(@"Insert into OrderLists(Order_Id, Order_Name) Values(@Id, @Name)", new {Id = orderList.Order_Id, Name = orderList.Order_Name});
+ */
 
                 var result = await conn.QueryAsync<OrderList>(Query, param, commandType: CommandType.StoredProcedure);
                 return result.ToList();
