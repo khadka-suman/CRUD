@@ -3,6 +3,8 @@ using System;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using CRUD.Models;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace CRUD.Data
 {
@@ -12,13 +14,31 @@ namespace CRUD.Data
         {
 
         }
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerModel> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<OrderList> OrderLists { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+        }
+
+        public static class Connection
+        {
+            public static string connectionStr = "Data Source=SUMAN; Initial Catalog = DATA_B; Integrated Security = True; Connect Timeout = 30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False";
+/*            public static string GetConnectionString(string clientName)
+            {
+                string connStr = "";
+                if (clientName.ToLower() == "client1")
+                {
+                    connStr = ConfigurationManager.["DefaultContextConn"].ConnectionString;
+                    configuration.GetConnectionString("FirstConnection");
+
+
+                }
+
+                return connStr;
+            }*/
         }
 
 

@@ -22,7 +22,7 @@ namespace CRUD.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CRUD.Models.Customer", b =>
+            modelBuilder.Entity("CRUD.Models.CustomerModel", b =>
                 {
                     b.Property<int>("Customer_Id")
                         .ValueGeneratedOnAdd()
@@ -38,11 +38,8 @@ namespace CRUD.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Order_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Order_Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Customer_Id");
 
@@ -57,16 +54,11 @@ namespace CRUD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Order_Id"), 1L, 1);
 
-                    b.Property<int?>("Customer_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Order_Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Order_Id");
-
-                    b.HasIndex("Customer_Id");
 
                     b.ToTable("OrderLists");
                 });
@@ -86,18 +78,6 @@ namespace CRUD.Migrations
                     b.HasKey("Product_Id");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("CRUD.Models.OrderList", b =>
-                {
-                    b.HasOne("CRUD.Models.Customer", null)
-                        .WithMany("Order_List")
-                        .HasForeignKey("Customer_Id");
-                });
-
-            modelBuilder.Entity("CRUD.Models.Customer", b =>
-                {
-                    b.Navigation("Order_List");
                 });
 #pragma warning restore 612, 618
         }

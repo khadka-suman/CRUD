@@ -9,8 +9,8 @@ namespace CRUD.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-         private readonly IProductRepository _productRepository;
-        public ProductController(IProductRepository productRepository)
+         private readonly IProductRepository2 _productRepository;
+        public ProductController(IProductRepository2 productRepository)
         {
             _productRepository = productRepository;
         }

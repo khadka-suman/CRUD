@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace CRUD.Repository
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : IProductRepository2
     {
         private readonly DefaultContext _defaultContext;
         public ProductRepository(DefaultContext defaultContext)
@@ -110,6 +110,7 @@ namespace CRUD.Repository
                  Console.WriteLine(ex);
              }*/
         }
+     
     }
 
 }
